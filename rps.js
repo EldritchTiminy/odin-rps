@@ -17,6 +17,7 @@
 
 function getUserChoice () {
   userInput = prompt("Rock, Paper, or Scissors?: ");
+  userInput = userInput.toLowerCase();
   if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
     return userInput;
   } else {
@@ -57,7 +58,11 @@ function determineWinner(userChoice, computerChoice) {
 };
 
 function rpsGame () {
-  userChoice = getUserChoice();
-  computerChoice = getComputerChoice();
-  determineWinner(userChoice, computerChoice);
+  startGame = prompt("Would you like to play rock-paper-scissors? (y/n): ");
+  startGame = startGame.toLowerCase();
+  if (startGame === "y") {
+    userChoice = getUserChoice();
+    computerChoice = getComputerChoice();
+    determineWinner(userChoice, computerChoice);
+  }
 }
