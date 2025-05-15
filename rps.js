@@ -34,7 +34,7 @@ function getComputerChoice () {
       return "scissors";
       break;
     default:
-      return "error";
+      return "Error: getComputerChoice";
       break;
   };
 };
@@ -52,6 +52,7 @@ function determineWinner(userChoice, computerChoice) {
     winner = "It\'s a Tie!";
     pScore += tieHand;
     cScore += tieHand;
+    tScore++;
   } else {
     winner = "Computer wins!";
     cScore++;
@@ -75,7 +76,7 @@ function rpsGame () {
     computerChoice = getComputerChoice();
     document.querySelector("#print-csel").textContent = computerChoice;
     determineWinner(userChoice, computerChoice);
-    updateScore(pScore, cScore);
+    updateScore(pScore, cScore, tScore);
   //}
 }
 
@@ -95,16 +96,25 @@ let resetBtn = document.querySelector("#reset"); // Reset Button Selector
 let tie0 = document.querySelector("#tie0"); // Ties = 0 Button Selector
 let tie1 = document.querySelector("#tie1"); // Both players +1 Button Selector
 
+// Game Mode Buttons
+let infGaMo = document.querySelector("#inf-game-mode"); // Infinite Button Selector
+let b2GaMo = document.querySelector("#best2"); // Best 2/3 Button Selector
+let b3GaMo = document.querySelector("#best3"); // Best 3/5 Button Selector
+let b4GaMo = document.querySelector("#best4"); // Best 4/7 Button Selector
+
 
 // Function Variables
 let playerChoice; // Placeholder for player's selection
 let pScore = 0; // Player Score
 let cScore = 0; // Computer Score
+let tScore = 0; // Tie Counter
 let cRound = 0; // Current Round Counter
 let tieHand = 0; // Tie Handler Score
+let gMode = 0; // Game Mode Setting (0 - inf, 1 - Best 2/3, 2 - Best 3/5, 3 - Best 4/7)
 
 
 // Event Listeners
+// Player Choice Buttons
 rbtn.addEventListener("click", () => { // Rock Button Event Listener
   playerChoice = "rock";
   //console.log(playerChoice);
@@ -120,26 +130,55 @@ sbtn.addEventListener("click", () => { // Scissors Button Event Listener
   //console.log(playerChoice);
   rpsGame();
 });
-resetBtn.addEventListener("click", () => { // Reset Button Event Listener
-  pScore = 0;
-  cScore = 0;
-  cRound = -1;
-  updateScore(pScore, cScore);
-});
-tie0.addEventListener("click", () => {
+
+// Options Buttons
+resetBtn.addEventListener("click", resetGame); // Reset Button Event Listener
+tie0.addEventListener("click", () => { // Ties = 0 Button Event Listener
   tieHand = 0;
+  document.querySelector("#tscore").hidden = false;
+  document.querySelector("#tscorep").hidden = false;
   document.querySelector("#thand").textContent = "Ties = 0";
 });
-tie1.addEventListener("click", () => {
+tie1.addEventListener("click", () => { // Both players +1 Button Event Listener
   tieHand = 1;
+  document.querySelector("#tscore").hidden = true;
+  document.querySelector("#tscorep").hidden = true;
   document.querySelector("#thand").textContent = "Both players +1";
 });
 
+// Game Mode Buttons
+
+
 
 // New V2 Functions
-function updateScore (pscore, cscore) { // Updates Scores and Current Round counter in DOM
+function updateScore (pscore, cscore, tscore) { // Updates Scores and Current Round counter in DOM
   document.querySelector("#pscore").innerText = pscore;
   document.querySelector("#cscore").innerText = cscore;
+  document.querySelector("#tscore").innerText = tscore;
   cRound++;
   document.querySelector("#cround").innerText = cRound;
+}
+
+function resetGame () { // Resets the game
+  pScore = 0;
+  cScore = 0;
+  tScore = 0;
+  cRound = -1;
+  updateScore(pScore, cScore, tScore);
+}
+
+function scoreCheck (pscore, cscore, gameMode) {
+  switch (gameMode) {
+    case 0:
+      break;
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    default:
+      console.log("Error: scoreCheck");
+      break;
+  }
 }
