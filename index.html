@@ -11,7 +11,52 @@
       <span id="rock">Rock,</span> <span id="paper">Paper,</span> <span id="scissors">Scissors!</span>
     </div>
 
-    <div> UI</div>
+    <div class="rules">
+      <p class="para-head">How to play:</p>
+      <p>Select an option below by clicking the corresponding button (rock, paper, or scissors). The computer will also make a selection of one of the options. If your selection matches the computer's, the game is a tie! Otherwise, rock beats scissors, scissors beats paper, and paper beats rock.</p>
+      <p>Your score will be displayed below. Give it a try!</p>
+    </div>
+
+    <div class="ui">
+      <div class="score">
+        <p>Score:</p>
+        <p>You: <span id="pscore">0</span></p>
+        <p>Computer: <span id="cscore">0</span></p>
+      </div>
+
+      <div class="current">
+        <p>Current Round: <span id="cround">0</span></p>
+        <p>Your Choice: <span id="print-psel">none</span></p>
+        <p>Comp Choice: <span id="print-csel">none</span></p>
+      </div>
+
+      <div class="btns">
+        <button id="rbtn">Rock</button>
+        <button id="pbtn">Paper</button>
+        <button id="sbtn">Scissors</button>
+      </div>
+
+      <div class="options">
+        <div class="rst">
+          <p>Options:</p>
+          <button id="reset">Reset</button>
+        </div>
+        
+        <div class="gmselect">
+          <p>Game Mode: <span id="gamemode">Infinite</span></p>
+          <button>Infinite</button>
+          <button>Best 2/3</button>
+          <button>Best 3/5</button>
+          <button>Best 4/7</button>
+        </div>
+
+        <div class="tiehandling">
+          <p>Tie Handling: <span id="thand">Ties = 0</span></p>
+          <button>Ties = 0</button>
+          <button>Both players +1</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="./rps.js"></script>

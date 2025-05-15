@@ -1,5 +1,3 @@
-// Pseudo Code Outline of Program
-
 // This function prompts the user for a choice between
 // rock, paper, or scissors.
 function getUserChoice () {
@@ -45,15 +43,16 @@ function getComputerChoice () {
 // This function takes the decisions of the user and the
 // computer and determines who won the game.
 function determineWinner(userChoice, computerChoice) {
-  let winner; // Declares a variable, 'winner'
-  // This if/else statement block processes the choices
-  // and determines the winner.
+  let winner; // Winner placeholder
+  // This if/else statement block - determines the winner.
   if ((userChoice === 'rock' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'scissors' && computerChoice === 'paper')) {
     winner = "Player wins!";
+    pScore++;
   } else if (userChoice === computerChoice) {
     winner = "It\'s a Tie!";
   } else {
     winner = "Computer wins!";
+    cScore++;
   };
   // This prints the results to the console.
   console.log(`You chose: ${userChoice}`);
@@ -65,11 +64,70 @@ function determineWinner(userChoice, computerChoice) {
 // This function asks the user if they want to play the game.
 // If so, it calls all the necessary functions.
 function rpsGame () {
-  startGame = prompt("Would you like to play rock-paper-scissors? (y/n): ");
-  startGame = startGame.toLowerCase();
-  if (startGame === "y") {
-    userChoice = getUserChoice();
+  //startGame = prompt("Would you like to play rock-paper-scissors? (y/n): ");
+  //startGame = startGame.toLowerCase();
+  //if (startGame === "y") {
+    // userChoice = getUserChoice();
+    userChoice = playerChoice;
+    document.querySelector("#print-psel").textContent = userChoice;
     computerChoice = getComputerChoice();
+    document.querySelector("#print-csel").textContent = computerChoice;
     determineWinner(userChoice, computerChoice);
-  }
+    updateScore(pScore, cScore);
+  //}
+}
+
+
+// Version 2 - UI
+// Below this point are the modifications to the program to add the functionality for the user interface, buttons, etc.
+
+// Player Choice Buttons
+let rbtn = document.querySelector("#rbtn"); // rock html button selector
+let pbtn = document.querySelector("#pbtn"); // paper html button selector
+let sbtn = document.querySelector("#sbtn"); // scissors html button selector
+
+// Reset Button
+let resetBtn = document.querySelector("#reset");
+
+// Function Variables
+let playerChoice; // Placeholder for player's selection
+let pScore = 0; // Player Score
+let cScore = 0; // Computer Score
+let cRound = 0; // Current Round Counter
+
+// Rock Button Event Listener
+rbtn.addEventListener("click", () => {
+  playerChoice = "rock";
+  //console.log(playerChoice);
+  rpsGame();
+});
+
+// Paper Button Event Listener
+pbtn.addEventListener("click", () => {
+  playerChoice = "paper";
+  //console.log(playerChoice);
+  rpsGame();
+});
+
+// Scissors Button Event Listener
+sbtn.addEventListener("click", () => {
+  playerChoice = "scissors";
+  //console.log(playerChoice);
+  rpsGame();
+});
+
+// Reset Button Event Listener
+resetBtn.addEventListener("click", () => {
+  pScore = 0;
+  cScore = 0;
+  cRound = -1;
+  updateScore(pScore, cScore);
+});
+
+// Updates Scores and Current Round counter in DOM
+function updateScore (pscore, cscore) {
+  document.querySelector("#pscore").innerText = pscore;
+  document.querySelector("#cscore").innerText = cscore;
+  cRound++;
+  document.querySelector("#cround").innerText = cRound;
 }
