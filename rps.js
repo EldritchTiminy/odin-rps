@@ -50,6 +50,8 @@ function determineWinner(userChoice, computerChoice) {
     pScore++;
   } else if (userChoice === computerChoice) {
     winner = "It\'s a Tie!";
+    pScore += tieHand;
+    cScore += tieHand;
   } else {
     winner = "Computer wins!";
     cScore++;
@@ -81,51 +83,61 @@ function rpsGame () {
 // Version 2 - UI
 // Below this point are the modifications to the program to add the functionality for the user interface, buttons, etc.
 
+
 // Player Choice Buttons
 let rbtn = document.querySelector("#rbtn"); // rock html button selector
 let pbtn = document.querySelector("#pbtn"); // paper html button selector
 let sbtn = document.querySelector("#sbtn"); // scissors html button selector
 
-// Reset Button
-let resetBtn = document.querySelector("#reset");
+
+// Options Buttons
+let resetBtn = document.querySelector("#reset"); // Reset Button Selector
+let tie0 = document.querySelector("#tie0"); // Ties = 0 Button Selector
+let tie1 = document.querySelector("#tie1"); // Both players +1 Button Selector
+
 
 // Function Variables
 let playerChoice; // Placeholder for player's selection
 let pScore = 0; // Player Score
 let cScore = 0; // Computer Score
 let cRound = 0; // Current Round Counter
+let tieHand = 0; // Tie Handler Score
 
-// Rock Button Event Listener
-rbtn.addEventListener("click", () => {
+
+// Event Listeners
+rbtn.addEventListener("click", () => { // Rock Button Event Listener
   playerChoice = "rock";
   //console.log(playerChoice);
   rpsGame();
 });
-
-// Paper Button Event Listener
-pbtn.addEventListener("click", () => {
+pbtn.addEventListener("click", () => { // Paper Button Event Listener
   playerChoice = "paper";
   //console.log(playerChoice);
   rpsGame();
 });
-
-// Scissors Button Event Listener
-sbtn.addEventListener("click", () => {
+sbtn.addEventListener("click", () => { // Scissors Button Event Listener
   playerChoice = "scissors";
   //console.log(playerChoice);
   rpsGame();
 });
-
-// Reset Button Event Listener
-resetBtn.addEventListener("click", () => {
+resetBtn.addEventListener("click", () => { // Reset Button Event Listener
   pScore = 0;
   cScore = 0;
   cRound = -1;
   updateScore(pScore, cScore);
 });
+tie0.addEventListener("click", () => {
+  tieHand = 0;
+  document.querySelector("#thand").textContent = "Ties = 0";
+});
+tie1.addEventListener("click", () => {
+  tieHand = 1;
+  document.querySelector("#thand").textContent = "Both players +1";
+});
 
-// Updates Scores and Current Round counter in DOM
-function updateScore (pscore, cscore) {
+
+// New V2 Functions
+function updateScore (pscore, cscore) { // Updates Scores and Current Round counter in DOM
   document.querySelector("#pscore").innerText = pscore;
   document.querySelector("#cscore").innerText = cscore;
   cRound++;
