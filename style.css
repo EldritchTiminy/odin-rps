@@ -68,6 +68,16 @@ body {
   text-align: right;
 }
 
+.playerw,
+.compw,
+.tiew {
+  display: none;
+  border: solid 1px black;
+  border-radius: 4px;
+  padding: 4px 40px 4px 4px;
+  text-align: right;
+}
+
 /* Options Styling */
 .options div{
   margin: 8px;

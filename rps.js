@@ -181,6 +181,11 @@ function resetGame () { // Resets the game
   cScore = 0;
   tScore = 0;
   cRound = -1;
+  document.querySelector(".score").style.display = "inline-block";
+  document.querySelector(".playerw").style.display = "none";
+  document.querySelector(".compw").style.display = "none";
+  document.querySelector(".tiew").style.display = "none";
+  document.querySelector("#reset").style.backgroundColor = "";
   updateScore(pScore, cScore, tScore);
 }
 
@@ -190,48 +195,73 @@ function scoreCheck (pscore, cscore, gameMode) {
       break;
     case 1:
       if (pscore === 2 && cscore < 2) {
-        console.log("you win");
+        gameFinish(0);
+        //console.log("you win");
         // return "You Win!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 2 && pscore < 2) {
-        console.log("you lose");
+        gameFinish(1);
+        //console.log("you lose");
         //return "The computer beat you!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 2 && pscore === 2) {
-        console.log("tie.");
-        resetGame();
+        gameFinish(2);
+        //console.log("tie.");
+        //resetGame();
       }
       break;
     case 2:
       if (pscore === 3 && cscore < 3) {
-        console.log("you win");
+        gameFinish(0);
+        //console.log("you win");
         // return "You Win!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 3 && pscore < 3) {
-        console.log("you lose");
+        gameFinish(1);
+        //console.log("you lose");
         //return "The computer beat you!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 3 && pscore === 3) {
-        console.log("tie.");
-        resetGame();
+        gameFinish(2);
+        //console.log("tie.");
+        //esetGame();
       }
       break;
     case 3:
       if (pscore === 4 && cscore < 4) {
-        console.log("you win");
+        gameFinish(0);
+        //console.log("you win");
         // return "You Win!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 4 && pscore < 4) {
-        console.log("you lose");
+        gameFinish(1);
+        //console.log("you lose");
         //return "The computer beat you!";
-        resetGame();
+        //resetGame();
       } else if (cscore === 4 && pscore === 4) {
-        console.log("tie.");
-        resetGame();
+        gameFinish(2);
+        //console.log("tie.");
+        //resetGame();
       }
       break;
     default:
       console.log("Error: scoreCheck");
       break;
+  }
+}
+
+function gameFinish (winner) {
+  if (winner === 0) {
+    document.querySelector(".score").style.display = "none";
+    document.querySelector(".playerw").style.display = "inline-block";
+    document.querySelector("#reset").style.backgroundColor = "red";
+  } else if (winner === 1) {
+    document.querySelector(".score").style.display = "none";
+    document.querySelector(".compw").style.display = "inline-block";
+    document.querySelector("#reset").style.backgroundColor = "red";
+  } else if (winner === 2) {
+    document.querySelector(".score").style.display = "none";
+    document.querySelector(".tiew").style.display = "inline-block";
+    document.querySelector("#reset").style.backgroundColor = "red";
   }
 }
