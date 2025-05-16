@@ -58,9 +58,9 @@ function determineWinner(userChoice, computerChoice) {
     cScore++;
   };
   // This prints the results to the console.
-  console.log(`You chose: ${userChoice}`);
-  console.log(`Computer chose: ${computerChoice}`);
-  console.log(winner);
+  //console.log(`You chose: ${userChoice}`);
+  //console.log(`Computer chose: ${computerChoice}`);
+  //console.log(winner);
 };
 
 
@@ -77,6 +77,7 @@ function rpsGame () {
     document.querySelector("#print-csel").textContent = computerChoice;
     determineWinner(userChoice, computerChoice);
     updateScore(pScore, cScore, tScore);
+    scoreCheck(pScore, cScore, gMode);
   //}
 }
 
@@ -147,6 +148,22 @@ tie1.addEventListener("click", () => { // Both players +1 Button Event Listener
 });
 
 // Game Mode Buttons
+infGaMo.addEventListener("click", () => {
+  gMode = 0;
+  document.querySelector("#gamemode").textContent = "Infinite";
+});
+b2GaMo.addEventListener("click", () => {
+  gMode = 1;
+  document.querySelector("#gamemode").textContent = "Best 2/3";
+});
+b3GaMo.addEventListener("click", () => {
+  gMode = 2;
+  document.querySelector("#gamemode").textContent = "Best 3/5";
+});
+b4GaMo.addEventListener("click", () => {
+  gMode = 3;
+  document.querySelector("#gamemode").textContent = "Best 4/7";
+});
 
 
 
@@ -172,10 +189,46 @@ function scoreCheck (pscore, cscore, gameMode) {
     case 0:
       break;
     case 1:
+      if (pscore === 2 && cscore < 2) {
+        console.log("you win");
+        // return "You Win!";
+        resetGame();
+      } else if (cscore === 2 && pscore < 2) {
+        console.log("you lose");
+        //return "The computer beat you!";
+        resetGame();
+      } else if (cscore === 2 && pscore === 2) {
+        console.log("tie.");
+        resetGame();
+      }
       break;
     case 2:
+      if (pscore === 3 && cscore < 3) {
+        console.log("you win");
+        // return "You Win!";
+        resetGame();
+      } else if (cscore === 3 && pscore < 3) {
+        console.log("you lose");
+        //return "The computer beat you!";
+        resetGame();
+      } else if (cscore === 3 && pscore === 3) {
+        console.log("tie.");
+        resetGame();
+      }
       break;
     case 3:
+      if (pscore === 4 && cscore < 4) {
+        console.log("you win");
+        // return "You Win!";
+        resetGame();
+      } else if (cscore === 4 && pscore < 4) {
+        console.log("you lose");
+        //return "The computer beat you!";
+        resetGame();
+      } else if (cscore === 4 && pscore === 4) {
+        console.log("tie.");
+        resetGame();
+      }
       break;
     default:
       console.log("Error: scoreCheck");
