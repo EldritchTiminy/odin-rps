@@ -1,12 +1,7 @@
-// This function prompts the user for a choice between
-// rock, paper, or scissors.
+// This function prompts the user for a choice in the console.
 function getUserChoice () {
-  // This prompt makes a pop-up that asks for the user's choice.
   userInput = prompt("Rock, Paper, or Scissors?: ");
-  // Changes the user's input to lowercase letters.
   userInput = userInput.toLowerCase();
-  // This if/else statement is for error handling.
-  // It checks the user's choice for spelling.
   if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
     return userInput;
   } else {
@@ -15,14 +10,9 @@ function getUserChoice () {
 };
 
 
-// This function determines the computer's choice
+// This function determines the computer's choice via random numbers.
 function getComputerChoice () {
-  // This generates a random number between 0 (inclusive)
-  // and 3 (exclusive). The floor method rounds it down
-  // so the number generated is either 0, 1, or 2.
   let choice = Math.floor(Math.random()*3)
-  // This assigns the computer's response based on the
-  // number generated.
   switch (choice) {
     case 0:
       return "rock";
@@ -40,11 +30,9 @@ function getComputerChoice () {
 };
 
 
-// This function takes the decisions of the user and the
-// computer and determines who won the game.
+// This function determines the winner of the game.
 function determineWinner(userChoice, computerChoice) {
-  let winner; // Winner placeholder
-  // This if/else statement block - determines the winner.
+  let winner;
   if ((userChoice === 'rock' && computerChoice === 'scissors') || (userChoice === 'paper' && computerChoice === 'rock') || (userChoice === 'scissors' && computerChoice === 'paper')) {
     winner = "Player wins!";
     pScore++;
@@ -57,15 +45,13 @@ function determineWinner(userChoice, computerChoice) {
     winner = "Computer wins!";
     cScore++;
   };
-  // This prints the results to the console.
-  //console.log(`You chose: ${userChoice}`);
-  //console.log(`Computer chose: ${computerChoice}`);
-  //console.log(winner);
+  console.log(`You chose: ${userChoice}`);
+  console.log(`Computer chose: ${computerChoice}`);
+  console.log(winner);
 };
 
 
 // This function asks the user if they want to play the game.
-// If so, it calls all the necessary functions.
 function rpsGame () {
   //startGame = prompt("Would you like to play rock-paper-scissors? (y/n): ");
   //startGame = startGame.toLowerCase();
@@ -83,8 +69,7 @@ function rpsGame () {
 
 
 // Version 2 - UI
-// Below this point are the modifications to the program to add the functionality for the user interface, buttons, etc.
-
+// Below this point are the modifications to the program to add the functionality for the user interface.
 
 // Player Choice Buttons
 let rbtn = document.querySelector("#rbtn"); // rock html button selector
@@ -96,6 +81,7 @@ let sbtn = document.querySelector("#sbtn"); // scissors html button selector
 let resetBtn = document.querySelector("#reset"); // Reset Button Selector
 let tie0 = document.querySelector("#tie0"); // Ties = 0 Button Selector
 let tie1 = document.querySelector("#tie1"); // Both players +1 Button Selector
+
 
 // Game Mode Buttons
 let infGaMo = document.querySelector("#inf-game-mode"); // Infinite Button Selector
@@ -118,19 +104,17 @@ let gMode = 0; // Game Mode Setting (0 - inf, 1 - Best 2/3, 2 - Best 3/5, 3 - Be
 // Player Choice Buttons
 rbtn.addEventListener("click", () => { // Rock Button Event Listener
   playerChoice = "rock";
-  //console.log(playerChoice);
   rpsGame();
 });
 pbtn.addEventListener("click", () => { // Paper Button Event Listener
   playerChoice = "paper";
-  //console.log(playerChoice);
   rpsGame();
 });
 sbtn.addEventListener("click", () => { // Scissors Button Event Listener
   playerChoice = "scissors";
-  //console.log(playerChoice);
   rpsGame();
 });
+
 
 // Options Buttons
 resetBtn.addEventListener("click", resetGame); // Reset Button Event Listener
@@ -146,6 +130,7 @@ tie1.addEventListener("click", () => { // Both players +1 Button Event Listener
   document.querySelector("#tscorep").hidden = true;
   document.querySelector("#thand").textContent = "Both players +1";
 });
+
 
 // Game Mode Buttons
 infGaMo.addEventListener("click", () => {
@@ -166,9 +151,9 @@ b4GaMo.addEventListener("click", () => {
 });
 
 
-
 // New V2 Functions
-function updateScore (pscore, cscore, tscore) { // Updates Scores and Current Round counter in DOM
+// Updates Scores and Current Round counter in DOM
+function updateScore (pscore, cscore, tscore) {
   document.querySelector("#pscore").innerText = pscore;
   document.querySelector("#cscore").innerText = cscore;
   document.querySelector("#tscore").innerText = tscore;
@@ -176,7 +161,8 @@ function updateScore (pscore, cscore, tscore) { // Updates Scores and Current Ro
   document.querySelector("#cround").innerText = cRound;
 }
 
-function resetGame () { // Resets the game
+// Resets the game
+function resetGame () {
   pScore = 0;
   cScore = 0;
   tScore = 0;
@@ -189,6 +175,7 @@ function resetGame () { // Resets the game
   updateScore(pScore, cScore, tScore);
 }
 
+// Checks the score for win conditions
 function scoreCheck (pscore, cscore, gameMode) {
   switch (gameMode) {
     case 0:
@@ -196,52 +183,28 @@ function scoreCheck (pscore, cscore, gameMode) {
     case 1:
       if (pscore === 2 && cscore < 2) {
         gameFinish(0);
-        //console.log("you win");
-        // return "You Win!";
-        //resetGame();
       } else if (cscore === 2 && pscore < 2) {
         gameFinish(1);
-        //console.log("you lose");
-        //return "The computer beat you!";
-        //resetGame();
       } else if (cscore === 2 && pscore === 2) {
         gameFinish(2);
-        //console.log("tie.");
-        //resetGame();
       }
       break;
     case 2:
       if (pscore === 3 && cscore < 3) {
         gameFinish(0);
-        //console.log("you win");
-        // return "You Win!";
-        //resetGame();
       } else if (cscore === 3 && pscore < 3) {
         gameFinish(1);
-        //console.log("you lose");
-        //return "The computer beat you!";
-        //resetGame();
       } else if (cscore === 3 && pscore === 3) {
         gameFinish(2);
-        //console.log("tie.");
-        //esetGame();
       }
       break;
     case 3:
       if (pscore === 4 && cscore < 4) {
         gameFinish(0);
-        //console.log("you win");
-        // return "You Win!";
-        //resetGame();
       } else if (cscore === 4 && pscore < 4) {
         gameFinish(1);
-        //console.log("you lose");
-        //return "The computer beat you!";
-        //resetGame();
       } else if (cscore === 4 && pscore === 4) {
         gameFinish(2);
-        //console.log("tie.");
-        //resetGame();
       }
       break;
     default:
@@ -250,6 +213,7 @@ function scoreCheck (pscore, cscore, gameMode) {
   }
 }
 
+// Handles the win statement
 function gameFinish (winner) {
   if (winner === 0) {
     document.querySelector(".score").style.display = "none";
